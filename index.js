@@ -132,7 +132,7 @@ moveGhost = ghost => {
         } 
 
         ghostEaten = ghost => {
-            if (squares[pacmanCurrentIndex].classList.contains("scared-ghost")) {
+            if (squares[ghost.currentIndex].classList.contains("pac-man")) {
                 squares[ghost.currentIndex].classList.remove("scared-ghost", "ghost", ghost.className)
                 ghost.isScared = false
                 ghost.currentIndex = ghost.startIndex
