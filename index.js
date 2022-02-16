@@ -122,17 +122,8 @@ moveGhost = ghost => {
 
         lastDirection = direction
 
-        squares[ghost.currentIndex].classList.remove("ghost", ghost.className, "scared-ghost")
-        ghost.currentIndex += direction
-        squares[ghost.currentIndex].classList.add("ghost", ghost.className)
-
-        if (ghost.isScared) {
-            squares[ghost.currentIndex].classList.add("scared-ghost")
-            ghostEaten(ghost)
-        } 
-
         ghostEaten = ghost => {
-            if (squares[ghost.currentIndex].classList.contains("pac-man")) {
+            if (squares[ghost.currentIndex].classList.contains("pac-man") && ghost.isScared) {
                 squares[ghost.currentIndex].classList.remove("scared-ghost", "ghost", ghost.className)
                 ghost.isScared = false
                 ghost.currentIndex = ghost.startIndex
@@ -140,6 +131,19 @@ moveGhost = ghost => {
                 scoreDisplay.textContent = score
             }
         }
+
+        ghostEaten(ghost)
+
+        squares[ghost.currentIndex].classList.remove("ghost", ghost.className, "scared-ghost")
+        ghost.currentIndex += direction
+        squares[ghost.currentIndex].classList.add("ghost", ghost.className)
+
+        ghostEaten(ghost)
+
+        if (ghost.isScared) {
+            squares[ghost.currentIndex].classList.add("scared-ghost")
+        }
+        
         gameOver()
     }, ghost.speed)
 }
